@@ -5,22 +5,21 @@ import time
 #URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[device]=medtronic-600://640G&count=1'
 URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[_id]=6064f94a4c8d1c0004b1cf3b'
 
-
 response = requests.get(URL)
 data = response.json()
 status = data[0]['pump']['status']['status']
-print(status)
+print("RAW data from JSON:",status)
 
 # Section related to convert time from JSON to readable value
 import re
-match = re.match('.* ([0-9])+h([0-9])+m .*', status)
+match = re.match('.* ([0-9])+h([0-9])+m.*', status) # in this line removed space before 2nf dot... (fix)
 hours, minutes = match.groups()
-
+print(f"Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
 
 
 # To Display collected earlier data and send notification to SLACK
 import json
-credentials = r'C:\Users\Sebastian\PycharmProjects\pythonProject\credentials.json'
+credentials = r'credentials.json'
 message = f"You must perform calibration before left {hours} hours and {minutes} minutes"
 
 
@@ -39,6 +38,12 @@ def post_to_slack(message, credentials):
     requests.post(url, json=data, verify=False)
 
 # Conditions
+
+# Send information about time to calibration every time when code is run. Comment this section if not need it.
+print("Message sent to SLACK")
+post_to_slack(message, credentials)
+##############################################################################################################
+
 
 while int(hours) == 2:
         print(f"more than {hours} hours")
