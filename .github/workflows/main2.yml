@@ -36,7 +36,7 @@ jobs:
           echo test, and deploy your project.
           
           
-     - name: Execute script
-       env:
-         haslo: ${{ secrets.test123 }}
-       run: python3 test.py
+      - name: Execute script
+        env:
+          haslo: ${{ secrets.test123 }}
+        run: python3 test.py
