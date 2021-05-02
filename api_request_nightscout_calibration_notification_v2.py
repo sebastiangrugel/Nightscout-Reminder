@@ -42,8 +42,8 @@ def post_to_slack(message, credentials):
 ########### TEST SECTION ###############
 
 # Send information about time to calibration every time when code is run. Comment this section if not need it.
-#print("Message sent to SLACK")
-#post_to_slack(message, credentials)
+print("Message sent to SLACK")
+post_to_slack(message, credentials)
 ##############################################################################################################
 
 if int(hours) == 6: # and int(minutes) == 0:
