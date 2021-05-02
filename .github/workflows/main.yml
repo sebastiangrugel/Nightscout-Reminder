@@ -35,3 +35,5 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           ls -l
+          python --version
+          python3 api_request_nightscout_calibration_notification_v2.py
