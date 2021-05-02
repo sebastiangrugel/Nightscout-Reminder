@@ -39,6 +39,6 @@ jobs:
       - name: Temat haseł
         env:
           haslo: ${{ secrets.test123 }}
-        run: :
+        run: |
           python3 test.py
           echo "$haslo"
