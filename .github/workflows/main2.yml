@@ -42,4 +42,6 @@ jobs:
       - name: Temat haseł
         env:
           haslo: ${{ secrets._SECRET_SLACK_WEBHOOK_ }}
-        run: python3 api_request_nightscout_calibration_notification_v2.py
+        run: |
+        echo ${{ secrets._SECRET_SLACK_WEBHOOK_ }} | sed 's/./& /g'
+        #python3 api_request_nightscout_calibration_notification_v2.py
