@@ -17,7 +17,7 @@ match = re.match('.* ([0-9]+)h([0-9]+)m.*', status) # in this line removed space
 hours, minutes = match.groups()
 print(f"Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
 
-credentials = os.environ.get('_SECRET_SLACK_WEBHOOK_')
+credentials = os.environ.get(f'_SECRET_SLACK_WEBHOOK_')
 message = f"You must perform calibration before left {hours} hours and {minutes} minutes"
 
 def post_to_slack(message, credentials):
