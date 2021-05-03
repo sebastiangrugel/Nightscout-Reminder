@@ -33,7 +33,7 @@ def post_to_slack(message, credentials):
 # Send information about time to calibration every time when code is run. Comment this section if not need it.
 print("Message sent to SLACK")
 post_to_slack(message, credentials)
-post_to_slack(f"Cogodzinny test GitHUB Actions. Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
+post_to_slack(f"Cogodzinny test GitHUB Actions. Kalibracja za maksymalnie {hours} godzin i {minutes} minut. @here @sebastiangrugel", credentials)
 ##############################################################################################################
 
 if int(hours) == 6: # and int(minutes) == 0:
