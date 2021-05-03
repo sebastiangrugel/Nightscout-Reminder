@@ -1,5 +1,6 @@
 import requests
 import time
+import os
 
 # Get RAW data from Nightscout related to calibration time
 URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[device]=medtronic-600://640G&count=1'
@@ -16,25 +17,12 @@ match = re.match('.* ([0-9]+)h([0-9]+)m.*', status) # in this line removed space
 hours, minutes = match.groups()
 print(f"Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
 
-
-# To Display collected earlier data and send notification to SLACK
-import json
-credentials = r'credentials.json'
+credentials = os.environ.get('_SECRET_SLACK_WEBHOOK_')
 message = f"You must perform calibration before left {hours} hours and {minutes} minutes"
-
-
-def get_credentials(credentials):
-    '''
-    Read credentials from JSON file.
-    '''
-    with open(credentials, 'r') as f:
-        creds = json.load(f)
-    return creds['slack_webhook']
-
 
 def post_to_slack(message, credentials):
     data = {'text': message}
-    url = get_credentials(credentials)
+    url = credentials
     requests.post(url, json=data, verify=False)
 
 
@@ -43,7 +31,7 @@ def post_to_slack(message, credentials):
 
 # Send information about time to calibration every time when code is run. Comment this section if not need it.
 print("Message sent to SLACK")
-post_to_slack(message, credentials)
+post_to_slack(f"Cogodzinny test GitHUB Actions. Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
 ##############################################################################################################
 
 if int(hours) == 6: # and int(minutes) == 0:
