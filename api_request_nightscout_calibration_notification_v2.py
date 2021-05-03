@@ -3,8 +3,8 @@ import time
 import os
 
 # Get RAW data from Nightscout related to calibration time
-URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[device]=medtronic-600://640G&count=1'
-#URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[_id]=6064f94a4c8d1c0004b1cf3b'
+#URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[device]=medtronic-600://640G&count=1'
+URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[_id]=6064f94a4c8d1c0004b1cf3b'
 
 response = requests.get(URL)
 data = response.json()
@@ -17,7 +17,8 @@ match = re.match('.* ([0-9]+)h([0-9]+)m.*', status) # in this line removed space
 hours, minutes = match.groups()
 print(f"Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
 
-credentials = os.environ.get(f'_SECRET_SLACK_WEBHOOK_')
+
+credentials = os.environ.get('_SECRET_SLACK_WEBHOOK_')
 message = f"You must perform calibration before left {hours} hours and {minutes} minutes"
 
 def post_to_slack(message, credentials):
