@@ -18,7 +18,7 @@ hours, minutes = match.groups()
 print(f"Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
 
 
-credentials = os.environ.get('_SECRET_SLACK_WEBHOOK_')
+credentials = os.environ.get('test123')
 message = f"You must perform calibration before left {hours} hours and {minutes} minutes"
 
 def post_to_slack(message, credentials):
