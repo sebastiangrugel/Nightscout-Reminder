@@ -3,9 +3,11 @@ import time
 import os
 
 # Get RAW data from Nightscout related to calibration time
-URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[device]=medtronic-600://640G&count=1'
-#URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[_id]=6064f94a4c8d1c0004b1cf3b'
+#URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[device]=medtronic-600://640G&count=1'
+URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[_id]=6064f94a4c8d1c0004b1cf3b'
+#URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[_id]=608fb555bed68000049e5fc7' #95m
 
+# GET data releted to pump calibration time from JSON
 response = requests.get(URL)
 data = response.json()
 status = data[0]['pump']['status']['status']
@@ -33,7 +35,7 @@ def post_to_slack(message, credentials):
 # Send information about time to calibration every time when code is run. Comment this section if not need it.
 print("Message sent to SLACK")
 post_to_slack(message, credentials)
-post_to_slack(f"Cogodzinny test GitHUB Actions. Kalibracja za maksymalnie {hours} godzin i {minutes} minut. @here @sebastiangrugel", credentials)
+post_to_slack(f"Cogodzinny test GitHUB Actions. Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
 ##############################################################################################################
 
 if int(hours) == 6: # and int(minutes) == 0:
@@ -57,7 +59,7 @@ if int(hours) == 1:
         post_to_slack(message, credentials)
 
 ''' Temporary not working
-if int(hours) < 1:
+if int(hours) == null:
         print("less than 1 hours", int(hours))
         print("Message sent to SLACK")
         post_to_slack(message, credentials)
