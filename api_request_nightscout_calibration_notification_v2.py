@@ -21,7 +21,7 @@ print(f"Information converted from JSON by REGEX: {hours} hours and {minutes} mi
 
 
 credentials = os.environ.get('_SECRET_SLACK_WEBHOOK_')
-message = f"You must perform calibration before left {hours} hours and {minutes} minutes"
+message = f"Kalibracja za maksymalnie {hours} godzin i {minutes} minut."
 
 def post_to_slack(message, credentials):
     data = {'text': message}
@@ -34,11 +34,11 @@ def post_to_slack(message, credentials):
 
 # Send information about time to calibration every time when code is run. Comment this section if not need it.
 print("Message sent to SLACK")
-post_to_slack(message, credentials)
-post_to_slack(f"Cogodzinny test GitHUB Actions. Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
+#post_to_slack(message, credentials)
+post_to_slack(f"Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
 ##############################################################################################################
 
-if int(hours) == 6: # and int(minutes) == 0:
+if int(hours) == 3: # and int(minutes) == 0:
         print(f"{hours} hours")
         print("Message sent to SLACK")
         post_to_slack(message, credentials)
