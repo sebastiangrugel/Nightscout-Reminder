@@ -20,9 +20,9 @@ hours, minutes = match.groups()
 print(f"Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
 
 
+################ SECTION RELATED TO SLACK CONFIGURATION ##################################################
 credentials = os.environ.get('_SECRET_SLACK_WEBHOOK_')
 message = f"Kalibracja za maksymalnie {hours} godzin i {minutes} minut."
-
 def post_to_slack(message, credentials):
     data = {'text': message}
     url = credentials
@@ -30,55 +30,51 @@ def post_to_slack(message, credentials):
 
 
 
-########### TEST SECTION ###############
+########### TEST SECTION ############### EXECUTED EVERY CODE IS RUNNING ####################################
 
 # Send information about time to calibration every time when code is run. Comment this section if not need it.
 print("Message sent to SLACK")
 #post_to_slack(message, credentials)
 post_to_slack(f"Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
 
-
-var_secret_pushover_token_ = os.environ.get('_SECRET_PUSHOVER_TOKEN_')
-var_secret_pushover_user_ = os.environ.get('_SECRET_PUSHOVER_USER_')
-
-import http.client, urllib
-conn = http.client.HTTPSConnection("api.pushover.net:443")
-conn.request("POST", "/1/messages.json",
-  urllib.parse.urlencode({
-    "token": var_secret_pushover_token_,
-    "user": var_secret_pushover_user_,
-    "message": message,
-    "priority": "2",
-    "retry": "60",
-    "expire": "3600",
-    "sound": "alien",
-    "title": "!!!! KALIBRACJA !!!!",
-    "monospace": "1"
-  }), { "Content-type": "application/x-www-form-urlencoded" })
-conn.getresponse()
-
-
-##############################################################################################################
-
-if int(hours) == 3: # and int(minutes) == 0:
-        print(f"{hours} hours")
-        print("Message sent to SLACK")
-        post_to_slack(message, credentials)
-
-
 ##############################################################################################################
 
 # Conditions
 
-if int(hours) == 2:
+if int(hours) == 3: # calibration need it in less than 4 hours
+        print(f"{hours} hours")
+        print("Message sent to SLACK")
+        post_to_slack(message, credentials)
+
+if int(hours) == 2: # calibration need it in less than 3 hours
         print(f"more than {hours} hours")
         print("Message sent to SLACK")
         post_to_slack(message, credentials)
 
-if int(hours) == 1:
+if int(hours) == 1: # calibration need it in less than 2 hours
         print("more than 1 hours", int(hours))
         print("Message sent to SLACK")
         post_to_slack(message, credentials)
+
+        ###### CODE SENT PUSH NOTIFICATION TO MOBILEPHONE BY PUSHOVER.NET PLATFORM
+        var_secret_pushover_token_ = os.environ.get('_SECRET_PUSHOVER_TOKEN_')
+        var_secret_pushover_user_ = os.environ.get('_SECRET_PUSHOVER_USER_')
+        import http.client, urllib
+        conn = http.client.HTTPSConnection("api.pushover.net:443")
+        conn.request("POST", "/1/messages.json",
+                     urllib.parse.urlencode({
+                         "token": var_secret_pushover_token_,
+                         "user": var_secret_pushover_user_,
+                         "message": message,
+                         "priority": "2",
+                         "retry": "60",
+                         "expire": "3600",
+                         "sound": "alien",
+                         "title": "!!!! KALIBRACJA !!!!",
+                         "monospace": "1"
+                     }), {"Content-type": "application/x-www-form-urlencoded"})
+        conn.getresponse()
+        #########################################################################
 
 ''' Temporary not working
 if int(hours) == null:
