@@ -26,6 +26,8 @@ class TestRegex(unittest.TestCase):
         self.assertEqual(get_time('T:150%-1h54m | 12h5m OK'), (12, 5))
         self.assertEqual(get_time('T:200%-58m | 6h35m OK'), (6, 35))
         self.assertEqual(get_time('wstrzymany | 67% 2h45m'), (2, 45))
+        #self.assertEqual(get_time('| 67% 95m'), (0, 95))
+
 
 if __name__ == '__main__':
     unittest.main()
