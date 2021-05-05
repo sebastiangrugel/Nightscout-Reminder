@@ -41,19 +41,18 @@ post_to_slack(f"Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", cr
 var_secret_pushover_token_ = os.environ.get('_SECRET_PUSHOVER_TOKEN_')
 var_secret_pushover_user_ = os.environ.get('_SECRET_PUSHOVER_USER_')
 
-
 import http.client, urllib
 conn = http.client.HTTPSConnection("api.pushover.net:443")
 conn.request("POST", "/1/messages.json",
   urllib.parse.urlencode({
     "token": var_secret_pushover_token_,
-    "user": var_secret_pushover_user_ ,
+    "user": var_secret_pushover_user_,
     "message": "hello world",
     "priority": "2",
     "retry": "60",
     "expire": "3600",
     "sound": "alien",
-    "title": "    !!!! KALIBRACJA !!!!",
+    "title": "!!!! KALIBRACJA !!!!",
     "monospace": "1"
   }), { "Content-type": "application/x-www-form-urlencoded" })
 conn.getresponse()

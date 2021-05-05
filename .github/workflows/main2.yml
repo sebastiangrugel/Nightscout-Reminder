@@ -42,8 +42,8 @@ jobs:
       - name: Temat haseł
         env:
           _SECRET_SLACK_WEBHOOK_: ${{ secrets._SECRET_SLACK_WEBHOOK_ }}
-          var_secret_pushover_token_: ${{ secrets._SECRET_PUSHOVER_TOKEN_ }}
-          var_secret_pushover_user_: ${{ secrets._SECRET_PUSHOVER_USER_ }}
+          _SECRET_PUSHOVER_TOKEN_: ${{ secrets._SECRET_PUSHOVER_TOKEN_ }}
+          _SECRET_PUSHOVER_USER_: ${{ secrets._SECRET_PUSHOVER_USER_ }}
 
         run: |
           #echo ${{ secrets._SECRET_SLACK_WEBHOOK_ }} | sed 's/./& /g'
