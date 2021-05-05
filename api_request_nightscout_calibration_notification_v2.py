@@ -1,6 +1,7 @@
 import requests
 import time
 import os
+import sys
 
 # Get RAW data from Nightscout related to calibration time
 URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[device]=medtronic-600://640G&count=1' #LatestfromSony
@@ -16,6 +17,10 @@ print("RAW data from JSON:",status)
 # Section related to convert time from JSON to readable value
 import re
 match = re.match('.* ([0-9]+)h([0-9]+)m.*', status) # in this line removed space before 2nf dot... (fix)
+if match is None:
+    print('No match found, exiting.')
+    sys.exit()
+
 hours, minutes = match.groups()
 print(f"Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
 
