@@ -48,6 +48,3 @@ jobs:
         run: |
           #echo ${{ secrets._SECRET_SLACK_WEBHOOK_ }} | sed 's/./& /g'
           python3 api_request_nightscout_calibration_notification_v2.py
-
-var_secret_pushover_token_ = os.environ.get('_SECRET_PUSHOVER_TOKEN_')
-var_secret_pushover_user_ = os.environ.get('_SECRET_PUSHOVER_USER_')
