@@ -1,2 +1,4 @@
 Tests/credentials.json
 Tests/environment_variable_secrets.p
+Tests/test.py
+Tests/cred-github.json
