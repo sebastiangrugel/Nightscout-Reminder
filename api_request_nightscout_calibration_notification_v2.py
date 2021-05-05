@@ -76,10 +76,7 @@ if int(hours) == 1: # calibration need it in less than 2 hours
         conn.getresponse()
         #########################################################################
 
-''' Temporary not working
-if int(hours) == null:
+if int(hours) == 0:
         print("less than 1 hours", int(hours))
         print("Message sent to SLACK")
         post_to_slack(message, credentials)
-'''
-
