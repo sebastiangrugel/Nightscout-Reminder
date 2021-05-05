@@ -47,7 +47,7 @@ conn.request("POST", "/1/messages.json",
   urllib.parse.urlencode({
     "token": var_secret_pushover_token_,
     "user": var_secret_pushover_user_,
-    "message": "hello world",
+    "message": message,
     "priority": "2",
     "retry": "60",
     "expire": "3600",
