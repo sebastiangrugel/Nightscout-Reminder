@@ -48,7 +48,7 @@ def post_to_slack(message, credentials):
 print("Message sent to SLACK")
 #post_to_slack(message, credentials)
 #post_to_slack(f"<!channel> Cogodzinny test: Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
-post_to_slack(f"<@sebastiangrugel> Cogodzinny test: Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
+post_to_slack(f"<@UHR7Z857A> Cogodzinny test: Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
 
 ##############################################################################################################
 
