@@ -4,9 +4,9 @@ import os
 import sys
 
 # Get RAW data from Nightscout related to calibration time
-#URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[device]=medtronic-600://640G&count=1' #LatestfromSony
+URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[device]=medtronic-600://640G&count=1' #LatestfromSony
 #URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[_id]=6064f94a4c8d1c0004b1cf3b' #8h55m
-URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[_id]=608fb555bed68000049e5fc7' #95m
+#URL = 'https://grugelki-klikemia-jan.herokuapp.com/api/v1/devicestatus.json?find[_id]=608fb555bed68000049e5fc7' #95m
 
 # GET data releted to pump calibration time from JSON
 response = requests.get(URL)
@@ -21,19 +21,20 @@ match = re.match('.* ([0-9]+)h(([0-9]+)m)?.*', status)
 if match is not None:
     print(match.groups())
     hours, _, minutes = match.groups()
-    print(f"hours and minutes , Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
+    print(f"Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
 else:
     hours = 0
     match = re.match('.* (([0-9]+)m)?.*', status)
     print(match.groups())
     if match is not None:
         _, minutes = match.groups()
-        print(f"MINUTY TYLKO Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
+        print(f"Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
 
 
 ################ SECTION RELATED TO SLACK CONFIGURATION ##################################################
 credentials = os.environ.get('_SECRET_SLACK_WEBHOOK_')
 message = f"Kalibracja za maksymalnie {hours} godzin i {minutes} minut."
+
 def post_to_slack(message, credentials):
     data = {'text': message}
     url = credentials
@@ -46,7 +47,7 @@ def post_to_slack(message, credentials):
 # Send information about time to calibration every time when code is run. Comment this section if not need it.
 print("Message sent to SLACK")
 #post_to_slack(message, credentials)
-post_to_slack(f"Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
+post_to_slack(f"Cogodzinny test: Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
 
 ##############################################################################################################
 
