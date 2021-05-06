@@ -47,8 +47,8 @@ def post_to_slack(message, credentials):
 # Send information about time to calibration every time when code is run. Comment this section if not need it.
 print("Message sent to SLACK")
 #post_to_slack(message, credentials)
-post_to_slack(f"<!channel> Cogodzinny test: Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
-post_to_slack(f"<@sebastian grugel> Cogodzinny test: Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
+#post_to_slack(f"<!channel> Cogodzinny test: Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
+post_to_slack(f"<@sebastiangrugel> Cogodzinny test: Kalibracja za maksymalnie {hours} godzin i {minutes} minut.", credentials)
 
 ##############################################################################################################
 
