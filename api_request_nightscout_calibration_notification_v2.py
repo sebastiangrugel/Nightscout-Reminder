@@ -16,13 +16,19 @@ print("RAW data from JSON:",status)
 
 # Section related to convert time from JSON to readable value
 import re
-match = re.match('.* ([0-9]+)h([0-9]+)m.*', status) # in this line removed space before 2nf dot... (fix)
-if match is None:
-    print('No match found, exiting.')
-    sys.exit()
 
-hours, minutes = match.groups()
-print(f"Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
+match = re.match('.* ([0-9]+)h(([0-9]+)m)?.*', status)
+if match is not None:
+    print(match.groups())
+    hours, _, minutes = match.groups()
+    print(f"hours and minutes , Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
+else:
+    hours = 0
+    match = re.match('.* (([0-9]+)m)?.*', status)
+    print(match.groups())
+    if match is not None:
+        _, minutes = match.groups()
+        print(f"MINUTY TYLKO Information converted from JSON by REGEX: {hours} hours and {minutes} minutes")
 
 
 ################ SECTION RELATED TO SLACK CONFIGURATION ##################################################
@@ -85,3 +91,24 @@ if int(hours) == 0:
         print("less than 1 hours", int(hours))
         print("Message sent to SLACK")
         post_to_slack(message, credentials)
+
+        ###### CODE SENT PUSH NOTIFICATION TO MOBILEPHONE BY PUSHOVER.NET PLATFORM
+        var_secret_pushover_token_ = os.environ.get('_SECRET_PUSHOVER_TOKEN_')
+        var_secret_pushover_user_ = os.environ.get('_SECRET_PUSHOVER_USER_')
+        import http.client, urllib
+
+        conn = http.client.HTTPSConnection("api.pushover.net:443")
+        conn.request("POST", "/1/messages.json",
+                     urllib.parse.urlencode({
+                         "token": var_secret_pushover_token_,
+                         "user": var_secret_pushover_user_,
+                         "message": message,
+                         "priority": "2",
+                         "retry": "60",
+                         "expire": "3600",
+                         "sound": "alien",
+                         "title": "!!!! KALIBRACJA !!!!",
+                         "monospace": "1"
+                     }), {"Content-type": "application/x-www-form-urlencoded"})
+        conn.getresponse()
+        #########################################################################
